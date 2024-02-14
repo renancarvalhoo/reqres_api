@@ -8,7 +8,7 @@ RSpec.describe ReqresApiWrapper::Request, type: :service do
     context 'when the request is successful', vcr: { cassette_name: "successful_request" } do
       it 'returns a hash' do
         request = described_class.new(endpoint: endpoint, params: params)
-        expect(request.call).to be_a(Hash)
+        expect(JSON.parse(request.call.body)).to be_a(Hash)
       end
     end
 

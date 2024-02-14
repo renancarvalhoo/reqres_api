@@ -1,0 +1,81 @@
+<div class="container">
+  <% if flash[:error].present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <div class="page-wrapper">
+    <div class="page-header d-print-none">
+      <div class="container-xl">
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              Employees
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+      <div class="container-xl">
+        <div class="row row-cards">
+          <% @employees.each do |employee| %>
+            <div class="col-sm-6 col-lg-4">
+            <div class="card card-sm">
+              <%= link_to employee_path(employee['id']), class: "d-block" do %>
+                <%= image_tag employee['avatar'], class: "card-img-top" %>
+              <% end %>
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <div><%= employee['first_name'] %> <%= employee['last_name'] %></div>
+                    <div class="text-secondary"><%= employee['email'] %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="d-flex">
+          <ul class="pagination ms-auto">
+            <li class="page-item <%= "disabled" if @pagination_info[:page] == 1 %>">
+              <% if @pagination_info[:page] > 1 %>
+                <%= link_to employees_path(page: @pagination_info[:page].to_i - 1), class: "page-link", tabindex: "-1", "aria-disabled": "true" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+                  prev
+                <% end %>
+              <% else %>
+          <span class="page-link" tabindex="-1" aria-disabled="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+            prev
+          </span>
+              <% end %>
+            </li>
+            <% (1..@pagination_info[:total_pages]).each do |page| %>
+              <li class="page-item <%= "active" if @pagination_info[:page] == page %>">
+                <%= link_to employees_path(page: page), class: "page-link" do %>
+                  <%= page %>
+                <% end %>
+              </li>
+            <% end %>
+            <li class="page-item <%= "disabled" if @pagination_info[:page] == @pagination_info[:total_pages] %>">
+              <% if @pagination_info[:page] < @pagination_info[:total_pages] %>
+                <%= link_to employees_path(page: @pagination_info[:page].to_i + 1), class: "page-link" do %>
+                  next
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>
+                <% end %>
+              <% else %>
+                <span class="page-link" tabindex="-1" aria-disabled="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>
+                </span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
