@@ -45,7 +45,7 @@ The application will be available at http://localhost:3000. Open this URL in you
 ## Available Routes
 
 - `GET /`: The root path displays a list of employees.
-- `GET /employees`: Alias for the root path, displaying the list of employees.
+- `GET /employees`: Display the list of employees.
 - `GET /employees/:id`: Displays detailed information for a specific employee.
 
 ### Testing
