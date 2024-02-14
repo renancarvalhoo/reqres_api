@@ -22,8 +22,8 @@ Ensure you have the following installed:
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-github/employee-directory.git
-cd employee-directory
+git clone https://github.com/renancarvalhoo/reqres_api.git
+cd reqres_api
 ```
 
 ### Install dependencies
