@@ -7,9 +7,9 @@ RSpec.describe ReqresApiWrapper::Response do
 
     context 'when the request is successful', vcr: { cassette_name: 'successful_request' } do
       it 'correctly parses the data and meta from the response' do
-        raw_response = ReqresApiWrapper::ReqresRequest.new(endpoint: endpoint, params: params).call
+        raw_response = ReqresApiWrapper::Request.new(endpoint: endpoint, params: params).call
 
-        response = ReqresApiWrapper::ReqresResponse.new(raw_response)
+        response = ReqresApiWrapper::Response.new(raw_response)
 
         expect(response.data).to all(be_a(Hash))
         expect(response.data.first.keys).to include('id', 'email', 'first_name', 'last_name', 'avatar')
